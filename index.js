@@ -13,6 +13,9 @@ process.on('unhandledRejection', error => console.error(`Uncaught Promise Reject
 // fired when the bot logs into discord
 bot.on('ready', () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
+	console.log('Start Testing');
+	const myMessage = require('./Commands/myModule.js');
+	console.log(myMessage);
 });
 
 bot.on('message', async msg => {
@@ -28,16 +31,23 @@ bot.on('message', async msg => {
 	if (args === 'test') {
 		msg.reply('Would be too simple if it worked on the first try.');
 	}
+
+
 	// Try the following code block and then catch and console log the error if any
 	// Try... statements need a Catch or they will not work
 	try {
+
+		if (args.indexOf('kill') === 0) {
+			const user = msg.mentions.users.first().id;
+			msg.channel.send(`I put <@${user}> in a hole`);
+		}
 
 		// does not work disregard
 		new function(msg, args) {
 			require('./Commands/Ping.js');
 		};
 
-		// make sure the bot doesnt respond to other bots
+		// make sure the bot doesnt respond to itself
 		if(msg.author.bot) {
 			return;
 		}
@@ -84,11 +94,26 @@ bot.on('message', async msg => {
 				// so the while statement will move to the next position in the array
 				z++;
 			}
+			msg.channel.send(`Correct Path: ${[CP]}`);
+
+			for(i = 0; i < 10; i++) {
+				const v = 0;
+				msg.channel.awaitMessages(m => m.content === CP[v], { max: 2 })
+					.then(collected => console.log(collected.size))
+					.catch(collected => console.log(`hi ${collected.size}`));
+			}
+			msg.channel.send('dsaj').then(
+
+
+			);
 			/*
 			Command side notes:
 			# need to add a possiblity of dead ends for the labyrinth
 			# need to change CP to where it is more dynamic (so user can pick difficulty rather than only 10)
 			*/
+		}
+		if (args === 'reload') {
+			bot.destroy().then(bot.login(Settings.Token)).then(msg.channel.send('reloaded'));
 		}
 	}
 	// catching the error for the Try statement
