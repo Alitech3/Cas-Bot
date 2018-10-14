@@ -7,6 +7,8 @@ const bot = new Discord.Client();
 // require the information we put settings.json such as our bot token
 const Settings = require('./Settings.json');
 
+const Kill = require('./Assets/Kill.json');
+
 // used to catch errors
 process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
 
@@ -38,8 +40,12 @@ bot.on('message', async msg => {
 	try {
 
 		if (args.indexOf('kill') === 0) {
+			console.log('test');
 			const user = msg.mentions.users.first().id;
-			msg.channel.send(`I put <@${user}> in a hole`);
+			const s = Kill[Math.floor(Math.random() * Kill.length)]
+				.replace(/\${u}/g, user)
+				.replace(/\${author}/g, msg.author);
+			msg.channel.send(s);
 		}
 
 		// does not work disregard
@@ -57,12 +63,12 @@ bot.on('message', async msg => {
 			return;
 		}
 
-		// sends an image
+		// replys with an image
 		if (args === 'sad day on the ridge') {
 			msg.reply('https://cdn.discordapp.com/attachments/455765006789640213/493540525123567627/8DJeHEZ.jpg');
 		}
 
-		// sends an image
+		// replys with an image
 		if (args === 'evolution') {
 			msg.reply('https://images-ext-2.discordapp.net/external/6vNGE1_zgsBnnyDdDsouArEYQD4Oczh8rZ7X1ayOtrs/https/cdn.discordapp.com/attachments/313863641600360449/494005827804332043/2546737608247838577.jpg');
 		}
