@@ -1,7 +1,13 @@
+// exports the command for when its called in the index.js
 module.exports = {
+
+	// test = function
+	// taking in the parameters args and msg
 	test: function(args, msg) {
-		if(args === 'test') {
-			msg.reply('Would be too simple if it worked on the first try.');
-		}
+
+		// replying to the author of the message that triggered the command
+		msg.reply('Would be too simple if it worked on the first try.');
+
 	},
+
 };
