@@ -8,6 +8,9 @@ const bot = new Discord.Client();
 const Settings = require('./Settings.json');
 
 const Kill = require('./Assets/Kill.json');
+const Test = require('./Commands/Test.js');
+const Ping = require('./Commands/Ping.js');
+// const Commands = require('./Commands');
 
 // used to catch errors
 process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
@@ -15,12 +18,10 @@ process.on('unhandledRejection', error => console.error(`Uncaught Promise Reject
 // fired when the bot logs into discord
 bot.on('ready', () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
-	console.log('Start Testing');
-	const myMessage = require('./Commands/myModule.js');
-	console.log(myMessage);
 });
 
 bot.on('message', async msg => {
+
 
 	// constant that slices out the prefix for the bot then shifts whats left to lower case
 	/*
@@ -30,9 +31,7 @@ bot.on('message', async msg => {
 	const args = msg.content.slice(Settings.Prefix.length).toLowerCase();
 
 	// make sure nothing below here is broken
-	if (args === 'test') {
-		msg.reply('Would be too simple if it worked on the first try.');
-	}
+	Test.test(args, msg);
 
 
 	// Try the following code block and then catch and console log the error if any
@@ -48,10 +47,8 @@ bot.on('message', async msg => {
 			msg.channel.send(s);
 		}
 
-		// does not work disregard
-		new function(msg, args) {
-			require('./Commands/Ping.js');
-		};
+		//
+		Ping.test(args, msg);
 
 		// make sure the bot doesnt respond to itself
 		if(msg.author.bot) {
