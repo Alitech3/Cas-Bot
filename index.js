@@ -17,17 +17,18 @@ process.on('unhandledRejection', error => console.error(`Uncaught Promise Reject
 // event handler fired when the bot logs into discord
 bot.on('ready', () => {
 
-	// gettings the information for bot images in Settings.json
-	// (i couldnt think of a better way to do this easily while keeping the code concise)
+	// gettings the information from bot images in Settings.json
+	// (I couldnt think of a better way to do this easily while keeping the code concise)
 	const info = [Settings.Avatar.DiscordIB, Settings.Avatar.CAScan, Settings.Avatar.CASbot];
 
-	// which image in the array the bot is having its picture set to
+	// picking which image in the array the bot is having its picture set to
 	const set = info[0];
 
 	// checks the current avatar(profile picture) id and then compares that to the id of the one were trying to set
+	// if it returns true then it does nothing if it returns false it then sets the new avatar
 	(bot.user.avatar === set.ID) ? null : bot.user.setAvatar(set.Loc);
 
-	// logs the bot username and discriminator
+	// logs the bot username and discriminator as well as how many servers the bot is in
 	console.log(`Logged in as ${bot.user.tag}\nServer Count ${bot.guilds.size}`);
 
 	// sets the bot presence
