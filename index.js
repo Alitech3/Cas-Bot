@@ -17,11 +17,11 @@ process.on('unhandledRejection', error => console.error(`Uncaught Promise Reject
 // event handler fired when the bot logs into discord
 bot.on('ready', () => {
 
-	// gettings the information from bot images in Settings.json
+	// getting the information for the bot images in Settings.json
 	// (I couldnt think of a better way to do this easily while keeping the code concise)
 	const info = [Settings.Avatar.DiscordIB, Settings.Avatar.CAScan, Settings.Avatar.CASbot];
 
-	// picking which image in the array the bot is having its picture set to
+	// picking which image in info the bot is having its picture set to
 	const set = info[0];
 
 	// checks the current avatar(profile picture) id and then compares that to the id of the one were trying to set
