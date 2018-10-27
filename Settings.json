@@ -1,4 +1,18 @@
 {
-    "Token": "Token",
-    "Prefix": "CAS "
+	"Token": "Token",
+	"Prefix": "CAS ",
+	"Avatar": {
+		"DiscordIB": {
+			"Loc":"./Assets/Bot Profile Pictures/DiscordIB.png", 
+			"ID": "b37317fb3c82ca807d01079bfd5f5961"
+		},
+		"CAScan": {
+			"Loc":"./Assets/Bot Profile Pictures/DiscordIB.png",
+			"ID":"be304d7a9a7d0c75e4836540cbe6d729"
+		},
+		"CASbot": {
+			"Loc":"./Assets/Bot Profile Pictures/CASbot.png",
+			"ID":"64afd38a9d52ff220b10e22fc24180e9"
+		}
+	}
 }

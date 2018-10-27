@@ -7,6 +7,7 @@ const bot = new Discord.Client();
 // require the information we put in settings.json such as our bot token
 const Settings = require('./Settings.json');
 
+
 // require test.js file for use later
 const Test = require('./Commands/Test.js');
 
@@ -15,7 +16,22 @@ process.on('unhandledRejection', error => console.error(`Uncaught Promise Reject
 
 // event handler fired when the bot logs into discord
 bot.on('ready', () => {
-	console.log(`Logged in as ${bot.user.tag}`);
+
+	// gettings the information for bot images in Settings.json
+	// (i couldnt think of a better way to do this easily while keeping the code concise)
+	const info = [Settings.Avatar.DiscordIB, Settings.Avatar.CAScan, Settings.Avatar.CASbot];
+
+	// which image in the array the bot is having its picture set to
+	const set = info[0];
+
+	// checks the current avatar(profile picture) id and then compares that to the id of the one were trying to set
+	(bot.user.avatar === set.ID) ? null : bot.user.setAvatar(set.Loc);
+
+	// logs the bot username and discriminator
+	console.log(`Logged in as ${bot.user.tag}\nServer Count ${bot.guilds.size}`);
+
+	// sets the bot presence
+	bot.user.setPresence({ game: { name: 'International Baccalaureate Show podcast: http://bit.ly/IBSYoutube', type: 'Listening' }, status: 'online' });
 });
 
 // event handler for when the bot recives a message
