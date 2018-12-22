@@ -1,7 +1,7 @@
 // requring the discord.js lib
 const Discord = require('discord.js');
 
-// creating a new discord client (ie the bot)
+// creating a new discord client (ie: the bot)
 const bot = new Discord.Client();
 
 // require the information we put in settings.json such as our bot token
@@ -12,7 +12,7 @@ const Settings = require('./Settings.json');
 const Test = require('./Commands/Test.js');
 
 // used to catch errors so the code does not crash
-process.on('unhandledRejection', error => console.error(`Uncaught Promise Rejection:\n${error}`));
+process.on('unhandledRejection', error => console.log(`Uncaught Promise Rejection:\n${error}`));
 
 // event handler fired when the bot logs into discord
 bot.on('ready', () => {
@@ -26,10 +26,11 @@ bot.on('ready', () => {
 
 	// checks the current avatar(profile picture) id and then compares that to the id of the one were trying to set
 	// if it returns true then it does nothing if it returns false it then sets the new avatar
-	(bot.user.avatar === set.ID) ? null : bot.user.setAvatar(set.Loc);
+	// still getting error?
+	(bot.user.avatar === set.ID) ? undefined : bot.user.setAvatar(set.Loc);
 
-	// logs the bot username and discriminator as well as how many servers the bot is in
-	console.log(`Logged in as ${bot.user.tag}\nServer Count ${bot.guilds.size}`);
+	// console logs the bot username and discriminator as well as how many servers the bot is in
+	console.log(`Logged in as ${bot.user.tag}\nServer Count: ${bot.guilds.size}`);
 
 	// sets the bot presence
 	bot.user.setPresence({ game: { name: 'International Baccalaureate Show podcast: http://bit.ly/IBSYoutube', type: 'Listening' }, status: 'online' });
@@ -60,13 +61,13 @@ bot.on('message', async msg => {
 	//	const AdminFile = require(`./Admin/${Fargs}.js`);
 
 	// make sure nothing below here is broken
-	Test.test(args, msg);
+	//	Test.test(args, msg);
 
 	// Try the following code block and then catch and console log the error if any
 	// Try... statements need a Catch or they will not work
 	try {
 		// running the command that is called while passing in args and msg
-		CommandsFile.run(args, msg);
+		CommandsFile.run(args, msg, Discord);
 	}
 	// catching the error for the Try statement
 	catch(error) {
